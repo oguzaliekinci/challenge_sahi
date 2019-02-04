@@ -1,4 +1,4 @@
-package com.sahibindenchallenge;
+package com.sahibinden.challenge.ui;
 
 import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sahibindenchallenge.dummy.DummyContent;
+import com.sahibinden.challenge.R;
+import com.sahibinden.challenge.api.entities.DummyContent;
 
 /**
  * A fragment representing a single Item detail screen.

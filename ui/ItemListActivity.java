@@ -1,4 +1,4 @@
-package com.sahibindenchallenge;
+package com.sahibinden.challenge.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sahibindenchallenge.dummy.DummyContent;
+import com.sahibinden.challenge.R;
+import com.sahibinden.challenge.api.entities.DummyContent;
 
 import java.util.List;
 

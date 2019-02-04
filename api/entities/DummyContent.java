@@ -1,4 +1,4 @@
-package com.sahibindenchallenge.dummy;
+package com.sahibinden.challenge.api.entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
