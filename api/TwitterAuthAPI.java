@@ -6,12 +6,10 @@ import com.sahibinden.challenge.api.entities.Tweet;
 import java.util.ArrayList;
 
 import io.reactivex.Flowable;
-import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -38,6 +36,6 @@ public interface TwitterAuthAPI {
 
 
     @GET("1.1/statuses/home_timeline.json")
-    Flowable<ArrayList<Tweet>> getHomeTimeLine(@Query("count") int count,@Query("max_id") String maxId);
+    Flowable<ArrayList<Tweet>> getHomeTimeLine(@Query("count") int count, @Query("max_id") String maxId);
 
 }

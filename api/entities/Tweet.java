@@ -2,13 +2,11 @@ package com.sahibinden.challenge.api.entities;
 
 import android.os.Parcel;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Tweet extends Entity {
 
-    private long id;
-    private String text;
-    private String id_str;
-
-    public static Creator<Tweet> CREATOR = new Creator<Tweet>() {
+    public static final Creator<Tweet> CREATOR = new Creator<Tweet>() {
         @Override
         public Tweet createFromParcel(Parcel source) {
             final Tweet tweet = new Tweet();
@@ -21,6 +19,15 @@ public class Tweet extends Entity {
             return new Tweet[size];
         }
     };
+
+    @SerializedName("id")
+    private long id;
+    @SerializedName("text")
+    private String text;
+    @SerializedName("id_str")
+    private String id_str;
+
+
     Tweet(){
 
     }
@@ -28,6 +35,18 @@ public class Tweet extends Entity {
     public Tweet(long id, String text,String id_str) {
         this.id = id;
         this.text = text;
+        this.id_str = id_str;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setId_str(String id_str) {
         this.id_str = id_str;
     }
 
@@ -66,8 +85,9 @@ public class Tweet extends Entity {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
-         dest.writeLong(id);
-         dest.writeString(text);
+        dest.writeLong(id);
+        dest.writeString(text);
+        dest.writeString(id_str);
     }
 
     @Override
@@ -75,5 +95,6 @@ public class Tweet extends Entity {
 
         id = parcel.readLong();
         text = parcel.readString();
+        id_str = parcel.readString();
     }
 }

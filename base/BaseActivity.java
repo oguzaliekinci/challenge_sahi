@@ -69,6 +69,7 @@ public abstract class BaseActivity<V extends BaseViewModel> extends AppCompatAct
     @Override
     public void showError(Throwable error) {
 
+        //todo
     }
 
     @Override

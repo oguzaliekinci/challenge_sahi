@@ -25,14 +25,35 @@ public class ItemListViewModel extends BaseViewModel {
 
     public void retrieveHomeTimeLine(String nextResultId){
         setLoading(true);
-        getTwitterAuthService().sendHomeTimelineRequest(30,nextResultId).subscribeOn(Schedulers.io())
+
+        getTwitterAuthService().sendHomeTimelineRequest(30,nextResultId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ArrayList<Tweet>>() {
+                               @Override
+                               public void accept(ArrayList<Tweet> tweets) throws Exception {
+                                   setLoading(false);
+                                   tweetList.setValue(tweets);
+                               }
+                           }, new Consumer<Throwable>() {
+                               @Override
+                               public void accept(Throwable throwable) throws Exception {
+                                   setLoading(false);
+                                   setError(throwable.getMessage());
+                               }
+                           });
+
+                }
+   /*
+        getTwitterAuthService().sendHomeTimelineRequest(30,nextResultId)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(tweets -> {
                     setLoading(false);
                     tweetList.setValue(tweets);
 
-                }, throwable -> setLoading(false));
-    }
+                }, throwable -> setLoading(false));*/
+
 
     public LiveData<ArrayList<Tweet>> getTweetList() {
         return tweetList;

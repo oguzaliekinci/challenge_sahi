@@ -12,6 +12,7 @@ import java.util.Random;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
@@ -122,9 +123,11 @@ public class TwitterAuthService {
 
     }
 
-    public Flowable<ArrayList<Tweet>> sendHomeTimelineRequest(int count,String maxId){
-        return createTwitterAPIWithAccessTokenAndSecret(oAuthAccessTokenResponse.getOauth_token(),oAuthAccessTokenResponse.getOauth_token_secret()).getHomeTimeLine(count,maxId)
-               ;
+    public Flowable<ArrayList<Tweet>> sendHomeTimelineRequest(int count, String maxId){
+        return  createTwitterAPIWithAccessTokenAndSecret(
+                oAuthAccessTokenResponse.getOauth_token(),
+                oAuthAccessTokenResponse.getOauth_token_secret())
+                .getHomeTimeLine(count,maxId);
 
 
     }

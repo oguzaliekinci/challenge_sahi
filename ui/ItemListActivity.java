@@ -42,8 +42,8 @@ public class ItemListActivity extends BaseActivity<ItemListViewModel> implements
     public static final int STATUS_CODE = 10000;
 
     RecyclerView recyclerView;
-    PagingAdapter adapter = new PagingAdapter(this, mTwoPane) {
-    };
+    PagingAdapter adapter = null /*new PagingAdapter(this, mTwoPane) {
+    }*/;
     private ImageView imageView;
     private ItemListViewModel itemListViewModel;
 
@@ -77,18 +77,17 @@ public class ItemListActivity extends BaseActivity<ItemListViewModel> implements
 
         recyclerView = findViewById(R.id.item_list);
 
-        //setupRecyclerView((RecyclerView) recyclerView);
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
 
+        setupRecyclerView();
         recyclerView.addOnScrollListener(new PagingScrollListener(linearLayoutManager) {
             @Override
             protected void loadMore() {
                 loading = true;
-                String nextResultId = Utilities.retrieveNextResultId(tweetList);
+                String nextResultId = Utilities.retrieveNextResultId((ArrayList<Tweet>) tweetList);
                 if(!nextResultId.equals("0")){
                     itemListViewModel.retrieveHomeTimeLine(nextResultId);
 
@@ -102,13 +101,18 @@ public class ItemListActivity extends BaseActivity<ItemListViewModel> implements
         });
         itemListViewModel.getTweetList().observe(this, tweetList ->{
             this.tweetList = tweetList;
-            setupRecyclerView(tweetList);
+            updateRecyclerView(tweetList);
         });
     }
+private void updateRecyclerView(ArrayList<Tweet> tweets){
+    loading = false;
+    adapter.addAll(tweets);
+}
+    private void setupRecyclerView() {
 
-    private void setupRecyclerView(ArrayList<Tweet> tweets) {
-        loading = false;
-        adapter.addAll(tweets);
+        adapter = new PagingAdapter(this, mTwoPane);
+        recyclerView.setAdapter(adapter) ;
+
     }
 
     @Override
